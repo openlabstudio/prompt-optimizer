@@ -1,9 +1,9 @@
 import streamlit as st
 
-# Configuramos la página
-st.set_page_config(page_title="Test de evaluación", layout="centered")
+# Configuración de la página
+st.set_page_config(page_title="Prompt Optimizer", layout="centered")
 
-# Función para inyectar estilos CSS en modo oscuro con detalles en #CEFF08
+# Función para inyectar estilos en modo oscuro con detalles en #CEFF08
 def set_dark_theme():
     st.markdown(
         """
@@ -26,32 +26,32 @@ def set_dark_theme():
                 font-weight: 600;
             }
             
-            /* Línea horizontal */
+            /* Línea horizontal (más gruesa y en #CEFF08) */
             hr {
-                border: 2px solid #CEFF08; /* Color de la línea */
+                border: 4px solid #CEFF08;
                 margin: 1em 0;
             }
-            
+
             /* Campos de texto (TextArea) */
             .stTextArea label {
-                font-size: 1.2em;        /* Tamaño de la etiqueta (pregunta) */
+                font-size: 1.2em;
                 font-weight: 400;        
                 color: #FFFFFF;
                 margin-bottom: 0.3em;
             }
             .stTextArea>div>textarea {
-                background-color: #1e1e1e;  /* Fondo oscuro */
-                border: 1px solid #CEFF08;  /* Borde en #CEFF08 */
-                color: #FFFFFF;             /* Texto blanco */
+                background-color: #1e1e1e;
+                border: 1px solid #CEFF08;
+                color: #FFFFFF;
             }
             .stTextArea {
-                margin-bottom: 1em;         /* Espacio entre campos */
+                margin-bottom: 1em;
             }
             
-            /* Botón */
+            /* Botón en #CEFF08 */
             .stButton>button {
                 background-color: #CEFF08;
-                color: #121212;      /* Contraste de texto sobre fondo #CEFF08 */
+                color: #121212;
                 border: none;
                 border-radius: 6px;
                 padding: 0.6em 1.2em;
@@ -61,7 +61,14 @@ def set_dark_theme():
                 cursor: pointer;
             }
             .stButton>button:hover {
-                background-color: #e3ff5f; /* Cambia un poco el tono al pasar el mouse */
+                background-color: #e3ff5f;
+            }
+
+            /* Contenedor para centrar imagen del logo */
+            .center-logo {
+                display: flex;
+                justify-content: center;
+                margin: 1em 0;
             }
         </style>
         """,
@@ -71,18 +78,22 @@ def set_dark_theme():
 # Aplicamos el estilo
 set_dark_theme()
 
-# Título principal
-st.title("Test de evaluación")
+# --------------------------------------------------------------------------
+# Centra el logo en la parte superior
+st.markdown("<div class='center-logo'>", unsafe_allow_html=True)
+st.image("images/anim-logo-1fps-verde.gif", width=200)
+st.markdown("</div>", unsafe_allow_html=True)
+
+# TÍTULO PRINCIPAL
+st.title("Prompt Optimizer")
 
 # Línea de acento
 st.markdown("<hr>", unsafe_allow_html=True)
 
-# Las preguntas en campos de texto (sin 'help' para que no aparezca texto adicional)
+# EJEMPLO DE CAMPOS DE TEXTO (¡PON TUS PROPIOS CAMPOS AQUÍ!)
 q1 = st.text_area("¿En qué áreas del negocio ven potencial para IA?")
 q2 = st.text_area("¿Qué resultados esperan obtener con IA?")
-q3 = st.text_area("¿La empresa ya usa datos para la toma de decisiones?")
-q4 = st.text_area("¿Tienen un equipo dedicado a usar la IA para la automatización de procesos?")
 
-# Botón para enviar
+# BOTÓN
 if st.button("Enviar respuestas"):
-    st.write("¡Gracias por tu participación!")
+    st.write("¡Gracias! Pronto revisaremos tus respuestas.")
