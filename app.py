@@ -1,43 +1,88 @@
 import streamlit as st
 
-st.set_page_config(page_title="Generador de Prompts", layout="centered")
+# Configuramos la página
+st.set_page_config(page_title="Test de evaluación", layout="centered")
 
-# Estilos CSS personalizados para modo dark con tipografía Montserrat
+# Función para inyectar estilos CSS en modo oscuro con detalles en #CEFF08
 def set_dark_theme():
     st.markdown(
         """
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
-            body { background-color: #121212; color: #e0e0e0; font-family: 'Montserrat', sans-serif; }
-            .stTextArea, .stSelectbox { background-color: #1e1e1e !important; color: #e0e0e0 !important; font-family: 'Montserrat', sans-serif; }
-            .stButton>button { background-color: #6200ea; color: white; border-radius: 8px; font-family: 'Montserrat', sans-serif; }
+            
+            /* Estilo general */
+            body {
+                background-color: #121212;
+                color: #e0e0e0;
+                font-family: 'Montserrat', sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            
+            /* Encabezados */
+            h1, h2, h3, h4 {
+                color: #f2f2f2;
+                margin: 0.5em 0;
+                font-weight: 600;
+            }
+            
+            /* Línea horizontal */
+            hr {
+                border: 2px solid #CEFF08; /* Color de la línea */
+                margin: 1em 0;
+            }
+            
+            /* Campos de texto (TextArea) */
+            .stTextArea label {
+                font-size: 1.2em;        /* Tamaño de la etiqueta (pregunta) */
+                font-weight: 400;        
+                color: #FFFFFF;
+                margin-bottom: 0.3em;
+            }
+            .stTextArea>div>textarea {
+                background-color: #1e1e1e;  /* Fondo oscuro */
+                border: 1px solid #CEFF08;  /* Borde en #CEFF08 */
+                color: #FFFFFF;             /* Texto blanco */
+            }
+            .stTextArea {
+                margin-bottom: 1em;         /* Espacio entre campos */
+            }
+            
+            /* Botón */
+            .stButton>button {
+                background-color: #CEFF08;
+                color: #121212;      /* Contraste de texto sobre fondo #CEFF08 */
+                border: none;
+                border-radius: 6px;
+                padding: 0.6em 1.2em;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                font-size: 1em;
+                cursor: pointer;
+            }
+            .stButton>button:hover {
+                background-color: #e3ff5f; /* Cambia un poco el tono al pasar el mouse */
+            }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
+# Aplicamos el estilo
 set_dark_theme()
 
-def generate_prompt(purpose, scope, sources, format_output, audience, depth):
-    prompt = f"""
-    **Propósito del análisis:** {purpose}
-    **Alcance del contenido:** {scope}
-    **Fuentes o referencias:** {sources}
-    **Formato de salida:** {format_output}
-    **Audiencia:** {audience}
-    **Nivel de profundidad:** {depth}
-    """
-    return prompt
+# Título principal
+st.title("Test de evaluación")
 
-st.title("Generador de Prompts para Deep Research")
+# Línea de acento
+st.markdown("<hr>", unsafe_allow_html=True)
 
-purpose = st.text_area("Propósito del análisis", "Quiero un análisis detallado sobre...")
-scope = st.text_area("Alcance del contenido", "Incluye ejemplos de... Evita...")
-sources = st.text_area("Fuentes o referencias", "Proporcióname datos basados en estudios recientes de...")
-format_output = st.selectbox("Formato de salida", ["Informe estructurado", "Lista de puntos clave", "Otro (especificar en texto)"])
-audience = st.selectbox("Audiencia", ["Técnico", "Ejecutivo", "General", "Otro (especificar en texto)"])
-depth = st.selectbox("Nivel de profundidad", ["Resumen ejecutivo + Análisis profundo", "Solo resumen ejecutivo", "Solo análisis detallado"])
+# Las preguntas en campos de texto (sin 'help' para que no aparezca texto adicional)
+q1 = st.text_area("¿En qué áreas del negocio ven potencial para IA?")
+q2 = st.text_area("¿Qué resultados esperan obtener con IA?")
+q3 = st.text_area("¿La empresa ya usa datos para la toma de decisiones?")
+q4 = st.text_area("¿Tienen un equipo dedicado a usar la IA para la automatización de procesos?")
 
-if st.button("Generar Prompt"):
-    result = generate_prompt(purpose, scope, sources, format_output, audience, depth)
-    st.text_area("Prompt generado", result, height=200)
+# Botón para enviar
+if st.button("Enviar respuestas"):
+    st.write("¡Gracias por tu participación!")
