@@ -3,13 +3,12 @@ import streamlit as st
 # Configuración de la página
 st.set_page_config(page_title="Prompt Optimizer", layout="centered")
 
-# Función para inyectar estilos en modo oscuro con detalles en #CEFF08
 def set_dark_theme():
     st.markdown(
         """
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
-            
+
             /* Estilo general */
             body {
                 background-color: #121212;
@@ -25,10 +24,18 @@ def set_dark_theme():
                 margin: 0.5em 0;
                 font-weight: 600;
             }
-            
-            /* Línea horizontal (más gruesa y en #CEFF08) */
-            hr {
-                border: 4px solid #CEFF08;
+
+            /* Contenedor para centrar el logo */
+            .center-logo {
+                display: flex;
+                justify-content: center;
+                margin: 1em 0;
+            }
+
+            /* Línea separadora personalizada */
+            .separator {
+                border: 0;
+                border-top: 4px solid #CEFF08; /* Más gruesa y color #CEFF08 */
                 margin: 1em 0;
             }
 
@@ -63,37 +70,31 @@ def set_dark_theme():
             .stButton>button:hover {
                 background-color: #e3ff5f;
             }
-
-            /* Contenedor para centrar imagen del logo */
-            .center-logo {
-                display: flex;
-                justify-content: center;
-                margin: 1em 0;
-            }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
-# Aplicamos el estilo
+# Aplica el estilo
 set_dark_theme()
 
-# --------------------------------------------------------------------------
-# Centra el logo en la parte superior
+# LOGO CENTRADO
 st.markdown("<div class='center-logo'>", unsafe_allow_html=True)
-st.image("images/anim-logo-1fps-verde.gif", width=200)
+st.image("images/anim-logo-1fps-verde.gif", width=150)  # Ajusta el width si necesitas
 st.markdown("</div>", unsafe_allow_html=True)
 
-# TÍTULO PRINCIPAL
+# TÍTULO
 st.title("Prompt Optimizer")
 
-# Línea de acento
-st.markdown("<hr>", unsafe_allow_html=True)
+# LÍNEA SEPARADORA
+st.markdown("<hr class='separator'>", unsafe_allow_html=True)
 
-# EJEMPLO DE CAMPOS DE TEXTO (¡PON TUS PROPIOS CAMPOS AQUÍ!)
+# PREGUNTAS (4 TEXT AREAS)
 q1 = st.text_area("¿En qué áreas del negocio ven potencial para IA?")
 q2 = st.text_area("¿Qué resultados esperan obtener con IA?")
+q3 = st.text_area("¿La empresa ya usa datos para la toma de decisiones?")
+q4 = st.text_area("¿Tienen un equipo dedicado a usar la IA para la automatización de procesos?")
 
 # BOTÓN
 if st.button("Enviar respuestas"):
-    st.write("¡Gracias! Pronto revisaremos tus respuestas.")
+    st.success("¡Gracias! Pronto revisaremos tus respuestas.")
