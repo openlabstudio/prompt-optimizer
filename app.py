@@ -39,19 +39,19 @@ def set_dark_theme():
                 margin: 1em 0;
             }
 
-            /* Campos de texto (TextArea) */
-            .stTextArea label {
-                font-size: 1.2em;
+            /* Campos de texto (TextArea, SelectBox, TextInput) */
+            .stTextArea label, .stSelectbox label, .stTextInput label {
+                font-size: 1.1em;
                 font-weight: 400;        
                 color: #FFFFFF;
                 margin-bottom: 0.3em;
             }
-            .stTextArea>div>textarea {
+            .stTextArea>div>textarea, .stTextInput>div>input {
                 background-color: #1e1e1e;
                 border: 1px solid #CEFF08;
                 color: #FFFFFF;
             }
-            .stTextArea {
+            .stTextArea, .stTextInput, .stSelectbox {
                 margin-bottom: 1em;
             }
             
@@ -75,26 +75,65 @@ def set_dark_theme():
         unsafe_allow_html=True,
     )
 
-# Aplica el estilo
+# Aplicamos el estilo
 set_dark_theme()
 
-# LOGO CENTRADO
+# LOGO CENTRADO (ajusta el nombre y ruta de tu gif/logo si no coincide)
 st.markdown("<div class='center-logo'>", unsafe_allow_html=True)
-st.image("images/anim-logo-1fps-verde.gif", width=150)  # Ajusta el width si necesitas
+st.image("images/anim-logo-1fps-verde.gif", width=150)  
 st.markdown("</div>", unsafe_allow_html=True)
 
-# TÍTULO
+# TÍTULO PRINCIPAL
 st.title("Prompt Optimizer")
 
 # LÍNEA SEPARADORA
 st.markdown("<hr class='separator'>", unsafe_allow_html=True)
 
-# PREGUNTAS (4 TEXT AREAS)
-q1 = st.text_area("¿En qué áreas del negocio ven potencial para IA?")
-q2 = st.text_area("¿Qué resultados esperan obtener con IA?")
-q3 = st.text_area("¿La empresa ya usa datos para la toma de decisiones?")
-q4 = st.text_area("¿Tienen un equipo dedicado a usar la IA para la automatización de procesos?")
+# Descripción
+st.markdown("#### Generador de prompts optimizados para **Deep Research** en ChatGPT")
+st.write("Completa los campos a continuación y obtendrás un prompt bien estructurado de forma automática.")
 
-# BOTÓN
-if st.button("Enviar respuestas"):
-    st.success("¡Gracias! Pronto revisaremos tus respuestas.")
+# Texto aclaratorio antes de las preguntas
+st.markdown("**Puedes dejar en blanco alguna de las respuestas si no tienes clara la respuesta.**")
+
+# --------------------------------------------------------------------------
+# CAMPOS PARA EL FORMULARIO (todos opcionales)
+purpose = st.text_area("1. Propósito del análisis", 
+    placeholder="Ejemplo: 'Quiero un análisis detallado sobre las tendencias de inversión en AI-driven innovation en Europa para 2025-2030.'")
+
+scope = st.text_area("2. Alcance del contenido", 
+    placeholder="Ejemplo: 'Incluye ejemplos de empresas que han implementado AI-driven innovation...'")
+
+sources = st.text_area("3. Fuentes o referencias",
+    placeholder="Ejemplo: 'Proporcióname datos basados en estudios recientes de 2023-2024...'")
+
+format_output = st.text_area("4. Formato de salida", 
+    placeholder="Ejemplo: 'Responde en formato de informe estructurado con introducción, análisis y conclusión.'")
+
+audience = st.text_area("5. Audiencia", 
+    placeholder="Ejemplo: 'Redacta la respuesta de manera técnica para un público especializado...'")
+
+depth = st.text_area("6. Nivel de profundidad", 
+    placeholder="Ejemplo: 'Dame un resumen ejecutivo de 200 palabras y luego un análisis profundo de 1000 palabras.'")
+
+# --------------------------------------------------------------------------
+# FUNCIÓN PARA GENERAR EL PROMPT
+def generate_prompt(purpose, scope, sources, format_output, audience, depth):
+    prompt = f\"\"\"  
+**Propósito del análisis:** {purpose}
+
+**Alcance del contenido:** {scope}
+
+**Fuentes o referencias:** {sources}
+
+**Formato de salida:** {format_output}
+
+**Audiencia:** {audience}
+
+**Nivel de profundidad:** {depth}
+\"\"\"
+    return prompt.strip()
+
+# BOTÓN PARA GENERAR
+if st.button("Generar Prompt"):
+    result = generate_prompt(purpose, scope, sources, format_output, audienc
